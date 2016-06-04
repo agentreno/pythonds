@@ -24,6 +24,24 @@ class Fraction:
 
       return firstnum == secondnum
 
+   def __ne__(self, other):
+      firstnum = self.num * other.den
+      secondnum = other.num * self.den
+
+      return firstnum != secondnum
+
+   def __lt__(self, other):
+      pass
+
+   def __le__(self, other):
+      pass
+
+   def __gt__(self, other):
+      pass
+
+   def __ge__(self, other):
+      pass
+
    def gcd(self, m, n):
       while m % n != 0:
          oldm = m
@@ -39,3 +57,11 @@ class Fraction:
 
       return Fraction(newnum // common, newden // common)
 
+   def __sub__(self, otherfraction):
+      pass
+
+   def __mul__(self, otherfraction):
+      pass
+
+   def __div__(self, otherfraction):
+      pass

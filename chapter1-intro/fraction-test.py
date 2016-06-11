@@ -35,7 +35,7 @@ class FractionTest(unittest.TestCase):
 
    def test_fractions_gt_comparison(self):
       f1 = Fraction(1, 2)
-      f2 = Fraction(1, 2)
+      f2 = Fraction(1, 3)
       isGreaterThan = (f1 > f2)
 
       self.assertEqual(isGreaterThan, True)
@@ -57,6 +57,14 @@ class FractionTest(unittest.TestCase):
 
       self.assertEqual(f3.num, 2)
       self.assertEqual(f3.den, 3)
+
+   def test_sub_two_fractions(self):
+      f1 = Fraction(1, 2)
+      f2 = Fraction(1, 3)
+      f3 = f1 - f2
+
+      self.assertEqual(f3.num, 1)
+      self.assertEqual(f3.den, 6)
 
 if __name__ == '__main__':
    unittest.main()

@@ -31,16 +31,28 @@ class Fraction:
       return firstnum != secondnum
 
    def __lt__(self, other):
-      pass
+      firstnum = self.num * other.den
+      secondnum = other.num * self.den
+
+      return firstnum < secondnum
 
    def __le__(self, other):
-      pass
+      firstnum = self.num * other.den
+      secondnum = other.num * self.den
+
+      return firstnum <= secondnum
 
    def __gt__(self, other):
-      pass
+      firstnum = self.num * other.den
+      secondnum = other.num * self.den
+
+      return firstnum > secondnum
 
    def __ge__(self, other):
-      pass
+      firstnum = self.num * other.den
+      secondnum = other.num * self.den
+
+      return firstnum >= secondnum
 
    def gcd(self, m, n):
       while m % n != 0:
@@ -58,7 +70,11 @@ class Fraction:
       return Fraction(newnum // common, newden // common)
 
    def __sub__(self, otherfraction):
-      pass
+      newnum = (self.num * otherfraction.den) - (self.den * otherfraction.num)
+      newden = self.den * otherfraction.den
+      common = self.gcd(newnum, newden)
+
+      return Fraction(newnum // common, newden // common)
 
    def __mul__(self, otherfraction):
       pass

@@ -77,7 +77,15 @@ class Fraction:
       return Fraction(newnum // common, newden // common)
 
    def __mul__(self, otherfraction):
-      pass
+      newnum = self.num * otherfraction.num
+      newden = self.den * otherfraction.den
+      common = self.gcd(newnum, newden)
+
+      return Fraction(newnum // common, newden // common)
 
    def __div__(self, otherfraction):
-      pass
+      newnum = self.num * otherfraction.den
+      newden = self.den * otherfraction.num
+      common = self.gcd(newnum, newden)
+
+      return Fraction(newnum // common, newden // common)

@@ -66,5 +66,21 @@ class FractionTest(unittest.TestCase):
       self.assertEqual(f3.num, 1)
       self.assertEqual(f3.den, 6)
 
+   def test_mul_two_fractions(self):
+      f1 = Fraction(2, 3)
+      f2 = Fraction(1, 2)
+      f3 = f1 * f2
+
+      self.assertEqual(f3.num, 1)
+      self.assertEqual(f3.den, 3)
+
+   def test_div_two_fractions(self):
+      f1 = Fraction(1, 3)
+      f2 = Fraction(1, 2)
+      f3 = f1 / f2
+
+      self.assertEqual(f3.num, 2)
+      self.assertEqual(f3.den, 3)
+
 if __name__ == '__main__':
    unittest.main()

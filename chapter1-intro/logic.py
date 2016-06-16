@@ -20,10 +20,28 @@ class BinaryGate(LogicGate):
       self.pinB = None
 
    def getPinA(self):
-      return int(input("Enter Pin A input for gate " + self.getLabel() + "-->"))
+      if self.pinA == None:
+         return int(input("Enter Pin A input for gate " + self.getLabel() + "-->"))
+      elif isinstance(self.pinA, Connector):
+         return self.pinA.getFrom().getOutput()
+      else:
+         return self.pinA
 
    def getPinB(self):
-      return int(input("Enter Pin B input for gate " + self.getLabel() + "-->"))
+      if self.pinB == None:
+         return int(input("Enter Pin B input for gate " + self.getLabel() + "-->"))
+      elif isinstance(self.pinB, Connector):
+         return self.pinB.getFrom().getOutput()
+      else:
+         return self.pinB
+
+   def setNextPin(self, source):
+      if self.pinA == None:
+         self.pinA = source
+      elif self.pinB == None:
+         self.pinB = source
+      else:
+         raise RuntimeError("Error: no empty pins")
 
 
 class UnaryGate(LogicGate):
@@ -34,7 +52,16 @@ class UnaryGate(LogicGate):
       self.pin = None
 
    def getPin(self):
-      return int(input("Enter Pin input for gate " + self.getLabel() + "-->"))
+      if self.pin == None:
+         return int(input("Enter Pin input for gate " + self.getLabel() + "-->"))
+      else:
+         return self.pin.getFrom().getOutput()
+
+   def setNextPin(self, source):
+      if self.pin == None:
+         self.pin = source
+      else:
+         raise RuntimeError("Error: no empty pins")
 
 class AndGate(BinaryGate):
 
@@ -73,3 +100,33 @@ class NotGate(UnaryGate):
          return 0
       else:
          return 1
+
+class NandGate(AndGate):
+
+   def performGateLogic(self):
+      if super().performGateLogic() == 1:
+         return 0
+      else:
+         return 1
+
+class NorGate(OrGate):
+
+   def performGateLogic(self):
+      if super().performGateLogic() == 1:
+         return 0
+      else:
+         return 1
+
+class Connector:
+
+   def __init__(self, fgate, tgate):
+      self.fromgate = fgate
+      self.togate = tgate
+
+      tgate.setNextPin(self)
+
+   def getFrom(self):
+      return self.fromgate
+
+   def getTo(self):
+      return self.togate

@@ -9,8 +9,9 @@
 class Fraction:
 
    def __init__(self, top, bottom):
-      self.num = top
-      self.den = bottom
+      common = self.gcd(top, bottom)
+      self.num = top // common
+      self.den = bottom // common
 
    def __str__(self):
       return str(self.num) + "/" + str(self.den)
@@ -65,9 +66,8 @@ class Fraction:
    def __add__(self, otherfraction):
       newnum = (self.num * otherfraction.den) + (self.den * otherfraction.num)
       newden = self.den * otherfraction.den
-      common = self.gcd(newnum, newden)
 
-      return Fraction(newnum // common, newden // common)
+      return Fraction(newnum, newden)
 
    def __sub__(self, otherfraction):
       newnum = (self.num * otherfraction.den) - (self.den * otherfraction.num)
@@ -83,9 +83,15 @@ class Fraction:
 
       return Fraction(newnum // common, newden // common)
 
-   def __div__(self, otherfraction):
+   def __truediv__(self, otherfraction):
       newnum = self.num * otherfraction.den
       newden = self.den * otherfraction.num
       common = self.gcd(newnum, newden)
 
       return Fraction(newnum // common, newden // common)
+
+   def getNum(self):
+      return self.num
+
+   def getDen(self):
+      return self.den

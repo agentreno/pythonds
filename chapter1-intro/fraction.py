@@ -9,9 +9,12 @@
 class Fraction:
 
    def __init__(self, top, bottom):
-      common = self.gcd(top, bottom)
-      self.num = top // common
-      self.den = bottom // common
+      if isinstance(top, int) and isinstance(bottom, int):
+         common = self.gcd(top, bottom)
+         self.num = top // common
+         self.den = bottom // common
+      else:
+         raise TypeError("Numerator and denominator must both be integers")
 
    def __str__(self):
       return str(self.num) + "/" + str(self.den)

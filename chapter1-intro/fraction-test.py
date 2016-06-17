@@ -82,5 +82,15 @@ class FractionTest(unittest.TestCase):
       self.assertEqual(f3.num, 2)
       self.assertEqual(f3.den, 3)
 
+   def test_construct_fraction_without_integer_raises_typeerror(self):
+      with self.assertRaises(TypeError):
+         f1 = Fraction(1.0, 2)
+
+      with self.assertRaises(TypeError):
+         f2 = Fraction(1, 2.0)
+
+      with self.assertRaises(TypeError):
+         f3 = Fraction(1.0, 2.0)
+
 if __name__ == '__main__':
    unittest.main()

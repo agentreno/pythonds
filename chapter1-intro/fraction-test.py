@@ -9,6 +9,13 @@ class FractionTest(unittest.TestCase):
       
       self.assertEqual(isEqual, True)
 
+   def test_fractions_eq_comparison_with_negatives(self):
+      f1 = Fraction(-1, 2)
+      f2 = Fraction(1, -2)
+      isEqual = (f1 == f2)
+
+      self.assertEqual(isEqual, True)
+
    def test_fractions_ne_comparison(self):
       f1 = Fraction(1, 2)
       f2 = Fraction(1, 3)
@@ -19,6 +26,13 @@ class FractionTest(unittest.TestCase):
    def test_fractions_lt_comparison(self):
       f1 = Fraction(1, 3)
       f2 = Fraction(1, 2)
+      isLessThan = (f1 < f2)
+
+      self.assertEqual(isLessThan, True)
+
+   def test_fractions_lt_comparison_with_negatives(self):
+      f1 = Fraction(1, -2)
+      f2 = Fraction(-1, 3)
       isLessThan = (f1 < f2)
 
       self.assertEqual(isLessThan, True)

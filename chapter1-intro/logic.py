@@ -130,3 +130,6 @@ class Connector:
 
    def getTo(self):
       return self.togate
+
+# TODO: Implement a half adder
+# TODO: Extend it to be a full adder

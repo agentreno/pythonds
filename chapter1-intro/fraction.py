@@ -66,11 +66,28 @@ class Fraction:
          n = oldm % oldn
       return n
 
-   def __add__(self, otherfraction):
-      newnum = (self.num * otherfraction.den) + (self.den * otherfraction.num)
-      newden = self.den * otherfraction.den
+   def __add__(self, other):
+      if isinstance(other, Fraction):
+         newnum = (self.num * other.den) + (self.den * other.num)
+         newden = self.den * other.den
+      elif isinstance(other, int):
+         otherfrac = Fraction(other, 1)
+         return self.__add__(otherfrac)
+      else:
+         raise TypeError("Can only add to other fractions or integers")
 
       return Fraction(newnum, newden)
+
+   def __radd__(self, other):
+      if isinstance(other, int):
+         otherfrac = Fraction(other, 1)
+         return self.__add__(otherfrac)
+      else:
+         raise TypeError("Can only add to other fractions or integers")
+
+   def __iadd__(self, other):
+      # TODO: Implement
+      pass
 
    def __sub__(self, otherfraction):
       newnum = (self.num * otherfraction.den) - (self.den * otherfraction.num)

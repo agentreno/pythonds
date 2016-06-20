@@ -1,3 +1,4 @@
+import random
 from enum import Enum
 
 class Rank(Enum):
@@ -47,3 +48,52 @@ class Deck:
 
     def __str__(self):
         return str(self.cards)
+
+    def pickRandomCard(self):
+        return self.cards.pop(random.randint(0, len(self.cards) - 1))
+
+if __name__ == "__main__":
+    print("==Pontoon==")
+    deck = Deck()
+    chooseAgain = True
+    total = 0
+
+    while chooseAgain:
+        choice = input("Your score is " + str(total) + \
+            ". Do you want to stick or twist? ")
+        if choice == "stick" or choice == "s":
+            chooseAgain = False
+        elif choice == "twist" or choice == "t":
+            card = deck.pickRandomCard()
+            print("You drew: " + str(card))
+            if card.rank.value == 1:
+                aceChooseAgain = True
+                while aceChooseAgain:
+                    acechoice = input("An ace can count for 1 or 11 points." + \
+                        " Which would you like? ")
+                    if acechoice == "one" or acechoice == "1":
+                        total += 1
+                        aceChooseAgain = False
+                    elif acechoice == "eleven" or acechoice == "11":
+                        total += 11
+                        aceChooseAgain = False
+                    else:
+                        print("I didn't understand your choice.")
+
+            elif card.rank.value > 10:
+                total += 10
+            else:
+                total += card.rank.value
+
+            if total >= 21:
+                chooseAgain = False
+        else:
+            print("I didn't recognise your choice.")
+
+    if total > 21:
+        print("You went bust with a score of " + str(total))
+    elif total == 21:
+        print("You got a perfect score of 21")
+    else:
+        print("You stuck at " + str(total))
+

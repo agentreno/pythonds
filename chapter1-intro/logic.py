@@ -103,6 +103,9 @@ class NotGate(UnaryGate):
 
 class NandGate(AndGate):
 
+   def __init__(self, n):
+      AndGate.__init__(self, n)
+
    def performGateLogic(self):
       if super().performGateLogic() == 1:
          return 0
@@ -111,6 +114,9 @@ class NandGate(AndGate):
 
 class NorGate(OrGate):
 
+   def __init__(self, n):
+      OrGate.__init__(self, n)
+
    def performGateLogic(self):
       if super().performGateLogic() == 1:
          return 0
@@ -118,6 +124,9 @@ class NorGate(OrGate):
          return 1
 
 class XorGate(BinaryGate):
+
+   def __init__(self, n):
+      BinaryGate.__init__(self, n)
 
    def performGateLogic(self):
       a = self.getPinA()
@@ -141,5 +150,25 @@ class Connector:
    def getTo(self):
       return self.togate
 
-# TODO: Implement a half adder
+class HalfAdder:
+
+    def __init__(self):
+        self.pinA = None
+        self.pinB = None
+        self.outsum = None
+        self.outcarry = None
+
+        self.xorgate = XorGate("xorgate")
+        self.andgate = AndGate("andgate")
+
+    def performLogic(self, a, b):
+        self.xorgate.pinA = a
+        self.xorgate.pinB = b
+        self.andgate.pinA = a
+        self.andgate.pinB = b
+
+        self.outsum = self.xorgate.performGateLogic()
+        self.outcarry = self.andgate.performGateLogic()
+
+
 # TODO: Extend it to be a full adder

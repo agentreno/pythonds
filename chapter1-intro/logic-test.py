@@ -1,5 +1,5 @@
 import unittest
-from logic import AndGate, OrGate, NotGate, NandGate, Connector
+from logic import AndGate, OrGate, NotGate, NandGate, Connector, HalfAdder
 
 class LogicTest(unittest.TestCase):
    def test_distributive_not(self):
@@ -35,6 +35,21 @@ class LogicTest(unittest.TestCase):
       g6.pinB = d
 
       self.assertEqual(g4.performGateLogic(), g7.performGateLogic())
+
+   def test_half_adder(self):
+      ha = HalfAdder()
+
+      ha.performLogic(0,0)
+      self.assertEqual(ha.outsum, 0)
+      self.assertEqual(ha.outcarry, 0)
+
+      ha.performLogic(1,0)
+      self.assertEqual(ha.outsum, 1)
+      self.assertEqual(ha.outcarry, 0)
+
+      ha.performLogic(1,1)
+      self.assertEqual(ha.outsum, 0)
+      self.assertEqual(ha.outcarry, 1)
 
 if __name__ == '__main__':
    unittest.main()

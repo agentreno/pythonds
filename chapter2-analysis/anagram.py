@@ -1,3 +1,7 @@
+# First solution for anagram checking
+# Checks off each character from first in second string
+# Each n character in s1 results in up to n checks in s2
+# Running time is sum of consecutive integers which is O(n^2)
 def isAnagramCheckoff(s1, s2):
    otherchars = list(s2)
    pos1 = 0
@@ -23,6 +27,9 @@ def isAnagramCheckoff(s1, s2):
 
    return stillOK
 
+# Second solution for anagram checker
+# Sorts the strings then compares them
+# Running time equivalent to that of the sorting algorithm which is O(n log n)
 def isAnagramSort(s1, s2):
    alist1 = list(s1)
    alist2 = list(s2)
@@ -44,4 +51,30 @@ def isAnagramSort(s1, s2):
 def isAnagramBrute(s1, s2):
    # Generate every permutation of s1 and compare to s2
    pass
+
+# Fourth solution for anagram checker
+# Stores a character count map for each string and compares
+# Each map creation is based on n and the map comparison is 26 compares
+# Running time is 2n + 26 or linear, O(n) at the cost of map storage
+def isAnagramCounts(s1, s2):
+   c1 = [0] * 26
+   c2 = [0] * 26
+
+   for i in range(len(s1)):
+      pos = ord(s1[i]) - ord('a')
+      c1[pos] = c1[pos] + 1
+
+   for i in range(len(s2)):
+      pos = ord(s2[i]) - ord('a')
+      c2[pos] = c2[pos] + 1
+
+   j = 0
+   stillOK = True
+   while j < 26 and stillOK:
+      if c1[j] == c2[j]:
+         j = j + 1
+      else:
+         stillOK = False
+
+   return stillOK
 

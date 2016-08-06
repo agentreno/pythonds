@@ -23,7 +23,7 @@ for i in range(10000,100001,10000):
 
 print("Dict get item")
 for i in range(10000,100001,10000):
-   t = timeit.Timer("x.get(0)",
+   t = timeit.Timer("x[0]",
          "from __main__ import x")
    x = {k:None for k in range(i)}
    get_time = t.timeit(number=1000)

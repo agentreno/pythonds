@@ -1,5 +1,5 @@
 import unittest
-from stack import Stack, revstring
+from stack import Stack, revstring, parenthesesChecker
 
 class StackTest(unittest.TestCase):
    def setUp(self):
@@ -31,6 +31,15 @@ class StackTest(unittest.TestCase):
       testString = "abc"
       reversedString = revstring(testString)
       self.assertEqual(reversedString, "cba")
+
+   def test_parentheses_checker(self):
+      unbalancedOpens = "(()"
+      unbalancedClose = "())"
+      balanced = "(())"
+
+      self.assertEqual(parenthesesChecker(unbalancedOpens), False)
+      self.assertEqual(parenthesesChecker(unbalancedClose), False)
+      self.assertEqual(parenthesesChecker(balanced), True)
 
 if __name__ == '__main__':
    unittest.main()

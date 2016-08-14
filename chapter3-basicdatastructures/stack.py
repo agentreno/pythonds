@@ -27,3 +27,18 @@ def revstring(string):
       reversedString += charStack.pop()
 
    return reversedString
+
+# Checks the balance of parentheses in a string
+# Returns true if balanced, false if not
+def parenthesesChecker(parString):
+   parStack = Stack()
+   try:
+      for letter in parString:
+         if letter == '(':
+            parStack.push(letter)
+         elif letter == ')':
+            parStack.pop()
+   except IndexError:
+      return False
+
+   return parStack.isEmpty()

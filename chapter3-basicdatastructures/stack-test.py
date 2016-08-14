@@ -1,5 +1,5 @@
 import unittest
-from stack import Stack, revstring, parenthesesChecker
+from stack import Stack, revstring, parenthesesChecker, intToBinaryStringDivideBy2
 
 class StackTest(unittest.TestCase):
    def setUp(self):
@@ -40,6 +40,13 @@ class StackTest(unittest.TestCase):
       self.assertEqual(parenthesesChecker(unbalancedOpens), False)
       self.assertEqual(parenthesesChecker(unbalancedClose), False)
       self.assertEqual(parenthesesChecker(balanced), True)
+
+   def test_binary_string(self):
+      self.assertEqual(intToBinaryStringDivideBy2(0), '0')
+      self.assertEqual(intToBinaryStringDivideBy2(1), '1')
+      self.assertEqual(intToBinaryStringDivideBy2(2), '10')
+      self.assertEqual(intToBinaryStringDivideBy2(3), '11')
+      self.assertEqual(intToBinaryStringDivideBy2(1024), '10000000000')
 
 if __name__ == '__main__':
    unittest.main()

@@ -42,3 +42,19 @@ def parenthesesChecker(parString):
       return False
 
    return parStack.isEmpty()
+
+def intToBinaryStringDivideBy2(number):
+   digitStack = Stack()
+
+   if number == 0:
+      return '0'
+   
+   while number > 0:
+      digitStack.push(number % 2)
+      number = number // 2
+
+   binaryString = ""
+   while digitStack.isEmpty() == False:
+      binaryString += str(digitStack.pop())
+
+   return binaryString

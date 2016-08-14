@@ -1,5 +1,5 @@
 import unittest
-from stack import Stack
+from stack import Stack, revstring
 
 class StackTest(unittest.TestCase):
    def setUp(self):
@@ -26,6 +26,11 @@ class StackTest(unittest.TestCase):
       self.mystack.push(2)
       self.mystack.push(3)
       self.assertEqual(self.mystack.size(), 3)
+
+   def test_string_reversal(self):
+      testString = "abc"
+      reversedString = revstring(testString)
+      self.assertEqual(reversedString, "cba")
 
 if __name__ == '__main__':
    unittest.main()

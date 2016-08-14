@@ -16,3 +16,14 @@ class Stack:
 
    def size(self):
       return len(self.items)
+
+def revstring(string):
+   charStack = Stack()
+   for letter in string:
+      charStack.push(letter)
+
+   reversedString = ""
+   while charStack.isEmpty() == False:
+      reversedString += charStack.pop()
+
+   return reversedString

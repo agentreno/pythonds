@@ -34,3 +34,25 @@ def infixToPostfix(infixString):
       postfix.append(opstack.pop())
 
    return " ".join(postfix)
+
+def evaluatePostfix(postfixString):
+   opstack = Stack()
+   postfix = postfixString.split()
+   operators = ["+", "-", "/", "*"]
+
+   for token in postfix:
+      if token in operators:
+         op2 = opstack.pop()
+         op1 = opstack.pop()
+         if token == "+":
+            opstack.push(op1 + op2)
+         elif token == "-":
+            opstack.push(op1 - op2)
+         elif token == "/":
+            opstack.push(op1 / op2)
+         elif token == "*":
+            opstack.push(op1 * op2)
+      else:
+         opstack.push(int(token))
+
+   return opstack.pop()

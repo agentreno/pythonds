@@ -90,7 +90,22 @@ class UnorderedList:
         pass
 
     def index(self, item):
-        pass
+        current = self.head
+        found = False
+        counter = 1
+
+        while not found and current != None:
+            if current.getData() == item:
+                found = True
+            else:
+                counter += 1
+                current = current.getNext()
+
+        if found:
+            return counter
+        else:
+            return False
+
 
     def pop(self):
         current = self.head

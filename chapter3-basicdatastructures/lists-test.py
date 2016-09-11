@@ -21,6 +21,14 @@ class UnorderedListTest(unittest.TestCase):
         self.assertEqual(mylist.pop(), 1)
         self.assertEqual(mylist.pop(), None)
 
+    def test_index(self):
+        mylist = UnorderedList()
+        mylist.append(1)
+        mylist.append(2)
+
+        self.assertEqual(mylist.index(1), 1)
+        self.assertEqual(mylist.index(2), 2)
+
 
 if __name__ == '__main__':
    unittest.main()

@@ -18,14 +18,20 @@ class Node:
 class UnorderedList:
     def __init__(self):
         self.head = None
+        self.tail = None
 
     def isEmpty(self):
         return self.head == None
 
     def add(self,item):
         temp = Node(item)
+
+        if self.head == None:
+            self.tail = temp
+
         temp.setNext(self.head)
         self.head = temp
+
 
     def size(self):
         current = self.head
@@ -63,8 +69,22 @@ class UnorderedList:
         else:
             previous.setNext(current.getNext())
 
+        if current == self.tail:
+            if previous == None:
+                self.tail = None
+            else:
+                self.tail = previous
+
+
     def append(self, item):
-        pass
+        temp = Node(item)
+
+        if self.tail == None:
+            self.head = temp
+            self.tail = temp
+        else:
+            self.tail.setNext(temp)
+            self.tail = temp
 
     def insert(self, item, pos):
         pass

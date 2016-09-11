@@ -93,4 +93,25 @@ class UnorderedList:
         pass
 
     def pop(self):
-        pass
+        current = self.head
+        previous = None
+        found = False
+
+        while not found:
+            if current == None:
+                return None
+
+            if current.getNext() != None:
+                previous = current
+                current = current.getNext()
+            else:
+                found = True
+
+        self.tail = previous
+        if previous != None:
+            previous.setNext(None)
+        else:
+            self.head = None
+
+        return current.getData()
+

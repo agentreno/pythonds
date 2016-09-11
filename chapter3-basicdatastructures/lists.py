@@ -75,7 +75,6 @@ class UnorderedList:
             else:
                 self.tail = previous
 
-
     def append(self, item):
         temp = Node(item)
 
@@ -87,7 +86,28 @@ class UnorderedList:
             self.tail = temp
 
     def insert(self, item, pos):
-        pass
+        newitem = Node(item)
+
+        if self.head == None:
+            self.head = newitem
+            return
+
+        counter = 0
+        behind = None
+        ahead = self.head
+        while counter < pos:
+            behind = ahead
+            ahead = ahead.getNext()
+            counter += 1
+
+        if behind != None:
+            behind.setNext(newitem)
+        else:
+            self.head = newitem
+
+        if ahead != None:
+            newitem.setNext(ahead)
+
 
     def index(self, item):
         current = self.head

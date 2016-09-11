@@ -1,4 +1,5 @@
 import unittest
+import pdb
 from lists import UnorderedList
 
 class UnorderedListTest(unittest.TestCase):
@@ -28,6 +29,16 @@ class UnorderedListTest(unittest.TestCase):
 
         self.assertEqual(mylist.index(1), 1)
         self.assertEqual(mylist.index(2), 2)
+
+    def test_insert(self):
+        mylist = UnorderedList()
+        mylist.insert(1, 0)
+        mylist.insert(3, 1)
+        mylist.insert(2, 1)
+
+        self.assertEqual(mylist.index(1), 1)
+        self.assertEqual(mylist.index(2), 2)
+        self.assertEqual(mylist.index(3), 3)
 
 
 if __name__ == '__main__':

@@ -32,7 +32,6 @@ class UnorderedList:
         temp.setNext(self.head)
         self.head = temp
 
-
     def size(self):
         current = self.head
         count = 0
@@ -108,7 +107,6 @@ class UnorderedList:
         if ahead != None:
             newitem.setNext(ahead)
 
-
     def index(self, item):
         current = self.head
         found = False
@@ -125,7 +123,6 @@ class UnorderedList:
             return counter
         else:
             return False
-
 
     def pop(self):
         current = self.head
@@ -150,3 +147,40 @@ class UnorderedList:
 
         return current.getData()
 
+class OrderedList:
+    def __init__(self):
+        self.head = None
+
+    def search(self,item):
+        current = self.head
+        found = False
+        stop = False
+        while current != None and not found and not stop:
+            if current.getData() == item:
+                found = True
+            else:
+                if current.getData() > item:
+                    stop = True
+                else:
+                    current = current.getNext()
+
+        return found
+
+    def add(self,item):
+        current = self.head
+        previous = None
+        stop = False
+        while current != None and not stop:
+            if current.getData() > item:
+                stop = True
+            else:
+                previous = current
+                current = current.getNext()
+
+        temp = Node(item)
+        if previous == None:
+            temp.setNext(self.head)
+            self.head = temp
+        else:
+            temp.setNext(current)
+            previous.setNext(temp)

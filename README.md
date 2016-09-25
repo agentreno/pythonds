@@ -6,8 +6,7 @@ https://coggle.it/diagram/V7AiVBurFu58_iAy/45df5d8f03420e2bf0b529930efce75430543
 
 ## TODO
 
-- Implement Queue with the rear at the end of a Python list
-- Do a timing comparison of the two different queue implementation operations
+- Compare dequeue timings in queue-analysis.py and give a reason
 - Implement a Queue that has O(1) for queue/dequeue on average
 - Implement the remaining operations for OrderedList
 - Implement a doubly linked list

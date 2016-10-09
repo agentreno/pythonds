@@ -184,3 +184,24 @@ class OrderedList:
         else:
             temp.setNext(current)
             previous.setNext(temp)
+
+    def isEmpty(self):
+        pass
+ 
+    def size(self):
+        pass
+ 
+    def remove(self, item):
+        pass
+ 
+    def append(self, item):
+        pass
+ 
+    def insert(self, item, pos):
+        pass
+ 
+    def index(self, item):
+        pass
+ 
+    def pop(self):
+        pass

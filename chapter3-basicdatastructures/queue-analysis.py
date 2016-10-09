@@ -4,23 +4,40 @@ def enqueueNItems(queue, n):
    for i in range(n):
       queue.enqueue(i)
 
+def dequeueNItems(queue, n):
+   for _ in range(n):
+      queue.dequeue()
+
 def testEnqueue():
    print("==Analysis of enqueue complexity==")
-   enqueueTimer = timeit.Timer("enqueueNItems(myqueue, n)",
+   queueEnqTimer = timeit.Timer("enqueueNItems(myqueue, n)",
       "from __main__ import enqueueNItems, n; "
       "from queue import Queue; myqueue = Queue()"
    )
-   enqueueAltTimer = timeit.Timer("enqueueNItems(myqueue, n)",
+   altqueueEnqTimer = timeit.Timer("enqueueNItems(myqueue, n)",
       "from __main__ import enqueueNItems, n; "
       "from queue import QueueAlt; myqueue = QueueAlt()"
    )
-   print("n     Queue      QueueAlt")
-   print("=========================")
+   queueDeqTimer = timeit.Timer("dequeueNItems(myqueue, n)",
+      "from __main__ import enqueueNItems, dequeueNItems, n; "
+      "from queue import Queue; myqueue = Queue(); "
+      "enqueueNItems(myqueue, 700000)"
+   )
+   altqueueDeqTimer = timeit.Timer("dequeueNItems(myqueue, n)",
+      "from __main__ import enqueueNItems, dequeueNItems, n; "
+      "from queue import QueueAlt; myqueue = QueueAlt(); "
+      "enqueueNItems(myqueue, 700000)"
+   )
+   print("n      Queue-enq     Queue-deq    QueueAlt-enq     QueueAlt-deq")
+   print("===============================================================")
    global n
    for n in range(10,101,10):
-      enqueueTime = enqueueTimer.timeit(number=1000)
-      enqueueAltTime = enqueueAltTimer.timeit(number=1000)
-      print("%d,%10.3f,%10.3f" % (n, enqueueTime, enqueueAltTime))
+      queueEnqTime = queueEnqTimer.timeit(number=1000)
+      altqueueEnqTime = altqueueEnqTimer.timeit(number=1000)
+      queueDeqTime = queueDeqTimer.timeit(number=1000)
+      altqueueDeqTime = altqueueDeqTimer.timeit(number=1000)
+      print("%d,%10.3f,%10.3f,%10.3f,%10.3f" % 
+            (n, queueEnqTime, queueDeqTime, altqueueEnqTime, altqueueDeqTime))
 
 if __name__ == "__main__":
    testEnqueue()

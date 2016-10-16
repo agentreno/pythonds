@@ -9,7 +9,6 @@ def dequeueNItems(queue, n):
       queue.dequeue()
 
 def testEnqueue():
-   print("==Analysis of enqueue complexity==")
    queueEnqTimer = timeit.Timer("enqueueNItems(myqueue, n)",
       "from __main__ import enqueueNItems, n; "
       "from queue import Queue; myqueue = Queue()"
@@ -17,6 +16,10 @@ def testEnqueue():
    altqueueEnqTimer = timeit.Timer("enqueueNItems(myqueue, n)",
       "from __main__ import enqueueNItems, n; "
       "from queue import QueueAlt; myqueue = QueueAlt()"
+   )
+   fasterqueueEnqTimer = timeit.Timer("enqueueNItems(myqueue, n)",
+      "from __main__ import enqueueNItems, n; "
+      "from queue import FasterQueue; myqueue = FasterQueue()"
    )
    queueDeqTimer = timeit.Timer("dequeueNItems(myqueue, n)",
       "from __main__ import enqueueNItems, dequeueNItems, n; "
@@ -28,16 +31,24 @@ def testEnqueue():
       "from queue import QueueAlt; myqueue = QueueAlt(); "
       "enqueueNItems(myqueue, 55000)"
    )
-   print("n       q-enq      q-deq    alt-enq    alt-deq")
-   print("==============================================")
+   fasterqueueDeqTimer = timeit.Timer("dequeueNItems(myqueue, n)",
+      "from __main__ import enqueueNItems, dequeueNItems, n; "
+      "from queue import FasterQueue; myqueue = FasterQueue(); "
+      "enqueueNItems(myqueue, 55000)"
+   )
+   print("n       q-enq      q-deq    alt-enq    alt-deq    fast-enq    fast-deq")
+   print("======================================================================")
    global n
    for n in range(10,101,10):
       queueEnqTime = queueEnqTimer.timeit(number=1000)
       altqueueEnqTime = altqueueEnqTimer.timeit(number=1000)
+      fasterqueueEnqTime = fasterqueueEnqTimer.timeit(number=1000)
       queueDeqTime = queueDeqTimer.timeit(number=100)
       altqueueDeqTime = altqueueDeqTimer.timeit(number=100)
-      print("%d,%10.3f,%10.3f,%10.3f,%10.3f" % 
-            (n, queueEnqTime, queueDeqTime, altqueueEnqTime, altqueueDeqTime))
+      fasterqueueDeqTime = fasterqueueDeqTimer.timeit(number=100)
+      print("%d,%10.3f,%10.3f,%10.3f,%10.3f,%10.3f,%10.3f" % 
+            (n, queueEnqTime, queueDeqTime, altqueueEnqTime, altqueueDeqTime,
+            fasterqueueEnqTime, fasterqueueDeqTime))
 
 if __name__ == "__main__":
    testEnqueue()

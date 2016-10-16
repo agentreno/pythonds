@@ -6,8 +6,6 @@ https://coggle.it/diagram/V7AiVBurFu58_iAy/45df5d8f03420e2bf0b529930efce75430543
 
 ## TODO
 
-- Implement a Queue that has O(1) for queue/dequeue on average
-  (use a built-in collections.deque where only appendleft/pop are used)
 - Implement the remaining operations for OrderedList
   (skeleton functions in lists.py)
 - Implement a doubly linked list

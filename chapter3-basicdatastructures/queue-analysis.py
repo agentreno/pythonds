@@ -21,21 +21,21 @@ def testEnqueue():
    queueDeqTimer = timeit.Timer("dequeueNItems(myqueue, n)",
       "from __main__ import enqueueNItems, dequeueNItems, n; "
       "from queue import Queue; myqueue = Queue(); "
-      "enqueueNItems(myqueue, 700000)"
+      "enqueueNItems(myqueue, 55000)"
    )
    altqueueDeqTimer = timeit.Timer("dequeueNItems(myqueue, n)",
       "from __main__ import enqueueNItems, dequeueNItems, n; "
       "from queue import QueueAlt; myqueue = QueueAlt(); "
-      "enqueueNItems(myqueue, 700000)"
+      "enqueueNItems(myqueue, 55000)"
    )
-   print("n      Queue-enq     Queue-deq    QueueAlt-enq     QueueAlt-deq")
-   print("===============================================================")
+   print("n       q-enq      q-deq    alt-enq    alt-deq")
+   print("==============================================")
    global n
    for n in range(10,101,10):
       queueEnqTime = queueEnqTimer.timeit(number=1000)
       altqueueEnqTime = altqueueEnqTimer.timeit(number=1000)
-      queueDeqTime = queueDeqTimer.timeit(number=1000)
-      altqueueDeqTime = altqueueDeqTimer.timeit(number=1000)
+      queueDeqTime = queueDeqTimer.timeit(number=100)
+      altqueueDeqTime = altqueueDeqTimer.timeit(number=100)
       print("%d,%10.3f,%10.3f,%10.3f,%10.3f" % 
             (n, queueEnqTime, queueDeqTime, altqueueEnqTime, altqueueDeqTime))
 

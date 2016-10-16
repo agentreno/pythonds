@@ -1,3 +1,5 @@
+import collections
+
 class Queue:
    def __init__(self):
       self.items = []
@@ -30,3 +32,20 @@ class QueueAlt:
 
    def size(self):
       return len(self.items)
+
+class FasterQueue:
+   def __init__(self):
+      self.items = collections.deque()
+
+   def isEmpty(self):
+      return len(self.items) == 0
+
+   def enqueue(self, item):
+      self.items.appendleft(item)
+
+   def dequeue(self):
+      return self.items.pop()
+
+   def size(self):
+      return len(self.items)
+

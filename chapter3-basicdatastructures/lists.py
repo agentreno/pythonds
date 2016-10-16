@@ -150,6 +150,7 @@ class UnorderedList:
 class OrderedList:
     def __init__(self):
         self.head = None
+        self.count = 0
 
     def search(self,item):
         current = self.head
@@ -185,23 +186,63 @@ class OrderedList:
             temp.setNext(current)
             previous.setNext(temp)
 
+        self.count += 1
+
     def isEmpty(self):
-        pass
+        return self.head == None
  
     def size(self):
-        pass
+        return self.count
  
     def remove(self, item):
-        pass
- 
-    def append(self, item):
-        pass
- 
-    def insert(self, item, pos):
-        pass
+        previous = None
+        current = self.head
+        stop = False
+
+        while current != None and not stop:
+            if current.getData() == item:
+                stop = True
+            else:
+                previous = current
+                current = current.getNext()
+
+        if current == None:
+            return False
+        elif previous == None:
+            self.head = current.getNext()
+        else:
+            previous.setNext(current.getNext())
+
+        self.count -= 1
  
     def index(self, item):
-        pass
+        current = self.head
+        stop = False
+        count = 1
+
+        while current != None and not stop:
+            if current.getData() == item:
+                stop = True
+            else:
+                count += 1
+                current = current.getNext()
+
+        return count
+
  
     def pop(self):
-        pass
+        current = self.head
+        previous = None
+        stop = False
+        
+        while current != None and not stop:
+            if current.getNext() == None:
+                stop = True
+            else:
+                previous = current
+                current = current.getNext()
+
+        previous.setNext(None)
+        self.count -= 1
+        return current.getData()
+

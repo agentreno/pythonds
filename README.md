@@ -6,7 +6,5 @@ https://coggle.it/diagram/V7AiVBurFu58_iAy/45df5d8f03420e2bf0b529930efce75430543
 
 ## TODO
 
-- Implement the remaining operations for OrderedList
-  (skeleton functions in lists.py)
 - Implement a doubly linked list
   (add back pointers to linked list in lists.py and update operations)

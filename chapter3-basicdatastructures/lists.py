@@ -287,3 +287,101 @@ class OrderedList:
         self.count -= 1
         return current.getData()
 
+
+class DoubleLinkedList:
+    def __init__(self):
+        self.head = None
+
+    def add(self, item):
+        # Unordered list, just add new nodes at the head
+        new_node = DoubleNode(item)
+        if self.head:
+            new_node.setNext(self.head)
+            self.head.setPrev(new_node)
+
+        self.head = new_node
+
+    def remove(self, item):
+        current = self.head
+
+        # No need to maintain two pointers with backward links
+        while current != None:
+            if current.getData() == item:
+                current.getPrev().setNext(current.getNext())
+            current = current.getNext()
+
+    def isEmpty(self):
+        return self.head == None
+
+    def size(self):
+        count = 0
+        current = self.head
+
+        # List traversal required where count not maintained by list
+        while current != None:
+            current = current.getNext()
+            count += 1
+
+    def append(self, item):
+        new_node = DoubleNode(item)
+        current = self.head
+
+        if current == None:
+            self.head = new_node
+            return
+
+        # Find the last element, only one pointer needed with backwards links
+        while current.getNext() != None:
+            current = current.getNext()
+
+        # Join the new node on to the tail
+        new_node.setPrev(current)
+        current.setNext(new_node)
+
+    def index(self, item):
+        count = 1
+        current = self.head
+
+        while current != None:
+            if current.getData() == item:
+                return count
+            else:
+                current = current.getNext()
+
+    def insert(self, pos, item):
+        new_node = DoubleNode(item)
+        count = 0
+        current = self.head
+
+        # Find the insertion point
+        while count < pos and current != None:
+            current = current.getNext()
+            count += 1
+
+        if current == None:
+            self.head = new_node
+        else:
+            # Link new node to previous and current
+            new_node.setPrev(current.getPrev())
+            new_node.setNext(current)
+            # Update the previous and current nodes
+            current.getPrev().setNext(new_node)
+            current.setPrev(new_node)
+
+    def pop(self):
+        current = self.head
+
+        while current.getNext() != None:
+            current = current.getNext()
+
+        if current == None:
+            # The list is empty
+            return None
+        elif current.getPrev() == None:
+            # The list had one element
+            self.head = None
+        else:
+            # The list had more than one, update the tail's next pointer
+            current.getPrev().setNext(None)
+
+        return current.getData()

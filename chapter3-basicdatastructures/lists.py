@@ -1,5 +1,5 @@
 class Node:
-    def __init__(self,initdata):
+    def __init__(self, initdata):
         self.data = initdata
         self.next = None
 
@@ -9,10 +9,10 @@ class Node:
     def getNext(self):
         return self.next
 
-    def setData(self,newdata):
+    def setData(self, newdata):
         self.data = newdata
 
-    def setNext(self,newnext):
+    def setNext(self, newnext):
         self.next = newnext
 
 class UnorderedList:
@@ -23,14 +23,16 @@ class UnorderedList:
     def isEmpty(self):
         return self.head == None
 
-    def add(self,item):
-        temp = Node(item)
+    def add(self, item):
+        new_node = Node(item)
 
+        # The first addition becomes and stays the tail
         if self.head == None:
-            self.tail = temp
+            self.tail = new_node
 
-        temp.setNext(self.head)
-        self.head = temp
+        # New nodes are added at the head for speed
+        new_node.setNext(self.head)
+        self.head = new_node
 
     def size(self):
         current = self.head
@@ -41,7 +43,7 @@ class UnorderedList:
 
         return count
 
-    def search(self,item):
+    def search(self, item):
         current = self.head
         found = False
         while current != None and not found:
@@ -52,10 +54,13 @@ class UnorderedList:
 
         return found
 
-    def remove(self,item):
+    def remove(self, item):
+        # Keep a previous node pointer to join the list around the removal
         current = self.head
         previous = None
         found = False
+
+        # Locate the matching item (assume it exists)
         while not found:
             if current.getData() == item:
                 found = True
@@ -63,11 +68,14 @@ class UnorderedList:
                 previous = current
                 current = current.getNext()
 
+        # Item to remove was at the head, change head to next item
         if previous == None:
             self.head = current.getNext()
         else:
+            # Join the list around the removal to remove it
             previous.setNext(current.getNext())
 
+        # Maintain the tail pointer
         if current == self.tail:
             if previous == None:
                 self.tail = None
@@ -75,37 +83,39 @@ class UnorderedList:
                 self.tail = previous
 
     def append(self, item):
-        temp = Node(item)
+        new_node = Node(item)
 
+        # Use the tail pointe to avoid list traversal for append
         if self.tail == None:
-            self.head = temp
-            self.tail = temp
+            self.head = new_node
+            self.tail = new_node
         else:
-            self.tail.setNext(temp)
-            self.tail = temp
+            self.tail.setNext(new_node)
+            self.tail = new_node
 
-    def insert(self, item, pos):
-        newitem = Node(item)
+    def insert(self, item, position):
+        new_node = Node(item)
 
         if self.head == None:
-            self.head = newitem
+            self.head = new_node
             return
 
+        # Find the nodes on either side of the insertion point
         counter = 0
         behind = None
         ahead = self.head
-        while counter < pos:
+        while counter < position:
             behind = ahead
             ahead = ahead.getNext()
             counter += 1
 
         if behind != None:
-            behind.setNext(newitem)
+            behind.setNext(new_node)
         else:
-            self.head = newitem
+            self.head = new_node
 
         if ahead != None:
-            newitem.setNext(ahead)
+            new_node.setNext(ahead)
 
     def index(self, item):
         current = self.head
@@ -129,6 +139,7 @@ class UnorderedList:
         previous = None
         found = False
 
+        # Traverse to the end of the list with two pointers
         while not found:
             if current == None:
                 return None
@@ -139,6 +150,7 @@ class UnorderedList:
             else:
                 found = True
 
+        # Update the tail and unlink the last node
         self.tail = previous
         if previous != None:
             previous.setNext(None)
@@ -152,14 +164,17 @@ class OrderedList:
         self.head = None
         self.count = 0
 
-    def search(self,item):
+    def search(self, item):
         current = self.head
         found = False
         stop = False
+
         while current != None and not found and not stop:
             if current.getData() == item:
                 found = True
             else:
+                # Assume items are integers
+                # Search complexity reduced in ordered lists
                 if current.getData() > item:
                     stop = True
                 else:
@@ -171,6 +186,8 @@ class OrderedList:
         current = self.head
         previous = None
         stop = False
+
+        # Add complexity increases as items can't just be added at the head
         while current != None and not stop:
             if current.getData() > item:
                 stop = True
@@ -178,13 +195,18 @@ class OrderedList:
                 previous = current
                 current = current.getNext()
 
-        temp = Node(item)
+        new_node = Node(item)
+        # Insertion point must be at the beginning
         if previous == None:
-            temp.setNext(self.head)
-            self.head = temp
+            # Link to current head if it exists
+            if current != None:
+                new_node.setNext(self.head)
+
+            self.head = new_node
         else:
-            temp.setNext(current)
-            previous.setNext(temp)
+            # Join nodes around the new node to insert
+            new_node.setNext(current)
+            previous.setNext(new_node)
 
         self.count += 1
 
@@ -192,6 +214,7 @@ class OrderedList:
         return self.head == None
  
     def size(self):
+        # Reduce size() complexity by storing count
         return self.count
  
     def remove(self, item):
@@ -207,10 +230,13 @@ class OrderedList:
                 current = current.getNext()
 
         if current == None:
+            # Item doesn't exist
             return False
         elif previous == None:
+            # Item is at the head
             self.head = current.getNext()
         else:
+            # Item is within the list, join around
             previous.setNext(current.getNext())
 
         self.count -= 1
@@ -235,6 +261,7 @@ class OrderedList:
         previous = None
         stop = False
         
+        # Find the end of the list and keep two pointers
         while current != None and not stop:
             if current.getNext() == None:
                 stop = True
@@ -242,6 +269,7 @@ class OrderedList:
                 previous = current
                 current = current.getNext()
 
+        # Unlink the last element
         previous.setNext(None)
         self.count -= 1
         return current.getData()

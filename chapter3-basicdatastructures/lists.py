@@ -15,6 +15,19 @@ class Node:
     def setNext(self, newnext):
         self.next = newnext
 
+
+class DoubleNode(Node):
+    def __init__(self, initdata):
+        Node.__init__(self, initdata)
+        self.prev = None
+
+    def getPrev(self):
+        return self.prev
+
+    def setPrev(self, newprev):
+        self.prev = newprev
+
+
 class UnorderedList:
     def __init__(self):
         self.head = None

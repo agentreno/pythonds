@@ -1,5 +1,5 @@
 import unittest
-from lists import UnorderedList, OrderedList
+from lists import UnorderedList, OrderedList, DoubleLinkedList
 
 class UnorderedListTest(unittest.TestCase):
     def test_append(self):
@@ -99,6 +99,49 @@ class OrderedListTest(unittest.TestCase):
 
         self.assertEqual(mylist.pop(), 3)
         self.assertEqual(mylist.size(), 2)
+
+class DoubleLinkedListTest(unittest.TestCase):
+    def test_append(self):
+        mylist = DoubleLinkedList()
+        mylist.append(1)
+        self.assertEqual(mylist.head.getData(), 1)
+
+        mylist.append(2)
+        self.assertEqual(mylist.head.getNext().getData(), 2)
+
+    def test_pop(self):
+        mylist = DoubleLinkedList()
+        mylist.append(1)
+        mylist.append(2)
+        
+        self.assertEqual(mylist.pop(), 2)
+        self.assertEqual(mylist.pop(), 1)
+        self.assertEqual(mylist.pop(), None)
+
+    def test_index(self):
+        mylist = DoubleLinkedList()
+        mylist.append(1)
+        mylist.append(2)
+
+        self.assertEqual(mylist.index(1), 1)
+        self.assertEqual(mylist.index(2), 2)
+
+    def test_insert(self):
+        mylist = DoubleLinkedList()
+        mylist.insert(0, 1)
+        mylist.insert(0, 2)
+        mylist.insert(0, 3)
+
+        self.assertEqual(mylist.index(1), 3)
+        self.assertEqual(mylist.index(2), 2)
+        self.assertEqual(mylist.index(3), 1)
+
+    def test_add(self):
+        mylist = DoubleLinkedList()
+        mylist.add(1)
+        
+        self.assertEqual(mylist.head.getData(), 1)
+
 
 if __name__ == '__main__':
    unittest.main()

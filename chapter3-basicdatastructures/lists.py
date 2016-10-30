@@ -347,6 +347,7 @@ class DoubleLinkedList:
                 return count
             else:
                 current = current.getNext()
+                count += 1
 
     def insert(self, pos, item):
         new_node = DoubleNode(item)
@@ -360,6 +361,10 @@ class DoubleLinkedList:
 
         if current == None:
             self.head = new_node
+        elif current.getPrev() == None:
+            new_node.setNext(current)
+            current.setPrev(new_node)
+            self.head = new_node
         else:
             # Link new node to previous and current
             new_node.setPrev(current.getPrev())
@@ -371,13 +376,14 @@ class DoubleLinkedList:
     def pop(self):
         current = self.head
 
-        while current.getNext() != None:
-            current = current.getNext()
-
         if current == None:
             # The list is empty
             return None
-        elif current.getPrev() == None:
+
+        while current.getNext() != None:
+            current = current.getNext()
+
+        if current.getPrev() == None:
             # The list had one element
             self.head = None
         else:
